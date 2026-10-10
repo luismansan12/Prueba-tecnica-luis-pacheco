@@ -176,14 +176,3 @@ CORE, así se puede seguir una operación de punta a punta. Por ejemplo:
 INFO [3f2a...] CoreEdicionRestAdapter : Enviando evento ACTUALIZACION de la póliza 555 al CORE
 INFO [3f2a...] CoreMockController     : [CORE-MOCK] Se intentó enviar al CORE el evento ACTUALIZACION de la póliza 555
 ```
-
-## Relación con el diseño del Módulo 1
-
-Este proyecto es una versión simplificada del diseño del Módulo 1:
-
-- `PolizaService` y `RiesgoService` corresponden al Servicio de Pólizas y al Servicio de Riesgos.
-- `CoreEdicionPort` y `CoreEdicionRestAdapter` aplican la arquitectura hexagonal: las reglas de negocio no
-  dependen de cómo se habla con el CORE.
-- El aviso al CORE después de confirmar la transacción sigue la idea del diseño orientado a eventos. En
-  producción se reemplazaría por el patrón outbox y una cola, para reintentar si el CORE no está disponible.
-- Las rutas son las del enunciado; la versión (`/v1`) la expondría el API Gateway.
