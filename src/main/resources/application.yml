@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gestion-polizas
+  datasource:
+    url: jdbc:h2:mem:polizasdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  sql:
+    init:
+      encoding: UTF-8
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    # data.sql se ejecuta después de que Hibernate crea las tablas
+    defer-datasource-initialization: true
+
+# IPC que se aplica en la renovación (5,20 %)
+negocio:
+  ipc: 0.0520
+
+security:
+  api-key: ${API_KEY:123456}
+
+# Servicio de edición del CORE. Aquí apunta al mock de esta misma aplicación;
+# en un ambiente real apuntaría a la capa media (WebLogic).
+core:
+  base-url: ${CORE_BASE_URL:http://localhost:${server.port}}
+  connect-timeout: 2s
+  read-timeout: 3s
+
+logging:
+  pattern:
+    level: "%5p [%X{correlationId:-}]"
